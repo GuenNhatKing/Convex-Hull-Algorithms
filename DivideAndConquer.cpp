@@ -131,6 +131,18 @@ void MergeSort(List<Point> &points, int l, int r, int cmpType = 0) {
     }
 }
 // ---- ---- ---- ---- ---- ---- ---- ----
+void RemoveMidPoints(List<Point> &convexHull) {
+    for(int i = 0; i < convexHull.Size(); ++i) {
+        int n = convexHull.Size();
+        int prev = ((i - 1) % n + n) % n;
+        int next = ((i + 1) % n + n) % n;
+        if(Orientation(convexHull[prev], convexHull[i], convexHull[next]) == 0) {
+            convexHull.RemoveAt(i);
+            --i;
+        }
+    }
+}
+// ---- ---- ---- ---- ---- ---- ---- ----
 List<Point> Conquer(List<Point> &points) {
     List<Point> result;
     for(int i = 0; i < points.Size(); ++i) {
@@ -267,6 +279,7 @@ List<Point> DivideAndConquer(Point points[], int n) {
     }
     MergeSort(convexHull, 0, convexHull.Size() - 1, 0);
     convexHull = Divide(convexHull);
+    RemoveMidPoints(convexHull);
     return convexHull;
 }
 // ---- ---- ---- ---- ---- ---- ---- ----

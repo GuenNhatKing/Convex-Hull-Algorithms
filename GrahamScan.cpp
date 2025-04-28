@@ -175,6 +175,18 @@ int MinYPosition(Point points[], int n) {
     return res;
 }
 // ---- ---- ---- ---- ---- ---- ---- ----
+void RemoveMidPoints(List<Point> &convexHull) {
+    for(int i = 0; i < convexHull.Size(); ++i) {
+        int n = convexHull.Size();
+        int prev = ((i - 1) % n + n) % n;
+        int next = ((i + 1) % n + n) % n;
+        if(Orientation(convexHull[prev], convexHull[i], convexHull[next]) == 0) {
+            convexHull.RemoveAt(i);
+            --i;
+        }
+    }
+}
+// ---- ---- ---- ---- ---- ---- ---- ----
 List<Point> GrahamScan(Point points[], int n) {
     List<Point> convexHull;
     Swap(points[MinYPosition(points, n)], points[0]);
@@ -212,6 +224,7 @@ List<Point> GrahamScan(Point points[], int n) {
     while(!helper.IsEmpty()) {
         convexHull.PushBack(helper.Pop());
     }
+    RemoveMidPoints(convexHull);
     return convexHull;
 }
 // ---- ---- ---- ---- ---- ---- ---- ----
