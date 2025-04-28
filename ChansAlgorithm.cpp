@@ -193,25 +193,29 @@ void RemoveMidPoints(List<Point> &convexHull) {
 // ---- ---- ---- ---- ---- ---- ---- ----
 List<Point> GrahamScan(List<Point> &points) {
     int n = points.Size();
-    Swap(points[MinYPosition(points, n)], points[0]);
-    MergeSort(points, 1, n - 1);
+    List<Point> list;
+    for(int i = 0; i < n; ++i) {
+        list.PushBack(points[i]);
+    }
+    Swap(list[MinYPosition(list, n)], list[0]);
+    MergeSort(list, 1, n - 1);
     int m = 1;
     for (int i = 1; i < n; ++i) {
-        while(i < n - 1 && Orientation(points[0], points[i], points[i + 1]) == 0) {
-            if(Distance(points[i], points[0]) > Distance(points[i + 1], points[0])) {
-                Swap(points[i], points[i + 1]);
+        while(i < n - 1 && Orientation(list[0], list[i], list[i + 1]) == 0) {
+            if(Distance(list[i], list[0]) > Distance(list[i + 1], points[0])) {
+                Swap(list[i], list[i + 1]);
             }
             ++i;
         }
-        points[m++] = points[i];
+        list[m++] = list[i];
     }
     List<Point> convexHull;
     if (m < 3) return convexHull;
     Stack<Point> st;
-    st.Push(points[0]);
-    st.Push(points[1]);
+    st.Push(list[0]);
+    st.Push(list[1]);
     for(int i = 2; i < m; ++i) {
-        Point p3 = points[i];
+        Point p3 = list[i];
         Point p2 = st.Pop();
         Point p1 = st.Pop();
         while(st.Size() > 1 && Orientation(p1, p2, p3) <= 0) {
