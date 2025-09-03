@@ -1,6 +1,17 @@
 # Convex-Hull-Algorithms
-Monotone Chain, Graham Scan, Jarvis March, Divide And Conquer, Chan's Algorithm
-# Thử nghiệm
+## Overview
+This project provides **C++ implementations** of several convex hull algorithms, including:
+
+- Monotone Chain  
+- Graham Scan  
+- Jarvis March  
+- Divide and Conquer  
+- Chan's Algorithm  
+
+The goal is to compare different approaches to solving the convex hull problem, analyze their outputs, and visualize the results.  
+
+---
+# Experiments
 ## Input
 ![Testcase](Screenshot/Testcase.png)
 ```
@@ -27,6 +38,11 @@ Monotone Chain, Graham Scan, Jarvis March, Divide And Conquer, Chan's Algorithm
 ```
 6, 48, 0, 45, 3, 7, 19, 1, 50, 0, 50, 36, 49, 39, 39, 50
 ```
+---
+
+## Notes
+- This project focuses on the **C++ implementation** and comparison of convex hull algorithms.  
+- The convex hull outputs are **visualized using Python’s Matplotlib** library for better illustration.  
 ## Chan's Algorithm
 ![Chan's Algorithm Output](Screenshot/ChansAlgorithm.png)
 ```
